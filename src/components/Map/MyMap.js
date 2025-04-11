@@ -15,11 +15,7 @@ function MyMap() {
     // retrieve all US counties 
     useEffect(function(){
         Gis.getUSCounties()
-            .then(function(c){
-                console.log('retrieved counties', c);
-
-                setCounties(c);
-            });
+            .then(setCounties);
     }, [setCounties]);
 
     return (
