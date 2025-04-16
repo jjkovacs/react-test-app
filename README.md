@@ -1,6 +1,4 @@
 # react-test-app
-First time trying to develop with React.
-
 Built a small app to display a map of all of the counties in the US.
 
 * Map Component - Leaflet
