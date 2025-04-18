@@ -1,7 +1,9 @@
-.mapview form {
+.mapview {
     margin: 20px;
 }
 
-.mapview form label {
+.mapview label {
     color: #d1d1d1;
+    margin-left: 10px;
+    margin-right: 10px;
 }

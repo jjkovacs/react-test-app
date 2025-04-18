@@ -1,7 +1,10 @@
 import Contants from '../Constants'
 
 let Gis = {
-    // returns GeoJSON polygons of all counties in the US
+    /**
+     * Retrieves GeoJSON polygons for all of the counties in the US.
+     * @returns {GeoJSON} GeoJSON polygons of all counties in the US
+     */
     getUSCounties: async function() { 
         const PAGESIZE = 2000;
         let offset = 0;
@@ -27,6 +30,18 @@ let Gis = {
             offset++;
         }
         while(exceededLimit);
+
+        return data; 
+    },
+
+    /**
+     * Retrieves GeoJSON polygons for all of the states in the US.
+     * @returns {GeoJSON} GeoJSON polygons of all states in the US
+     */
+    getUSStates: async function() { 
+        let response = await fetch(Contants.ApiUrls.GETUSSTATES);
+ 
+        let data = await response.json(); 
 
         return data; 
     }
