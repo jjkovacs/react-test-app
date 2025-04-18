@@ -44,7 +44,41 @@ let Gis = {
         let data = await response.json(); 
 
         return data; 
-    }
+    },
+
+    /**
+     * Retrieves GeoJSON polygons for all of the counties in the US.
+     * @returns {GeoJSON} GeoJSON polygons of all counties in the US
+     */
+    getUSBodiesOfWater: async function() { 
+        const PAGESIZE = 1000;
+        let offset = 0;
+        let data = null;
+        let exceededLimit = false;
+
+        // the API only returns a max of 2000 records, so we need to make 
+        // multiple requests with an offset to retrieve everything
+        do {
+            console.log('Fetching water', offset);
+            let response = await fetch(Contants.ApiUrls.GETUSBODIESOFWATER
+                    .replace('{{offset}}', offset * PAGESIZE));
+ 
+            let json = await response.json(); 
+
+            if(!data) {
+                data = json;
+            } else {
+                data.features = data.features.concat(json.features);
+            }
+
+            exceededLimit = json.properties && json.properties.exceededTransferLimit;
+
+            offset++;
+        }
+        while(exceededLimit);
+
+        return data; 
+    },
 }
 
 export default Gis;

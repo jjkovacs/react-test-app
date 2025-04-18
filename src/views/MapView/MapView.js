@@ -4,7 +4,7 @@ import MyMap from '../../components/Map/MyMap';
 import './MapView.css';
 
 function MapView() {
-    let defaultState = { countiesEnabled: false, statesEnabled: false };
+    let defaultState = { countiesEnabled: false, statesEnabled: false, waterEnabled: false };
     const [mapState, setMapState] = useState(defaultState);
 
     function onCheckedChange(e) {
@@ -21,6 +21,10 @@ function MapView() {
                 <label>
                     <input type="checkbox" id="counties" name="selected[]" value="countiesEnabled" checked={mapState.countiesEnabled} onChange={onCheckedChange} />
                     <span>Counties</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="water" name="selected[]" value="waterEnabled" checked={mapState.waterEnabled} onChange={onCheckedChange} />
+                    <span>Bodies of Water</span>
                 </label>
             </div>
             <MyMap></MyMap>

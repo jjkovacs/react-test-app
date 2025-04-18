@@ -14,6 +14,7 @@ function MyMap() {
     const DEFAULTZOOM = 5;
     let [counties, setCounties] = useState(null);
     let [states, setStates] = useState(null);
+    let [water, setWater] = useState(null);
     let mapState = useContext(MapViewContext);
 
     // retrieve all US counties 
@@ -27,6 +28,12 @@ function MyMap() {
         Gis.getUSStates()
             .then(setStates);
     }, [setStates]);
+
+    // retrieve all US bodies of water 
+    useEffect(function(){
+        Gis.getUSBodiesOfWater()
+            .then(setWater);
+    }, [setWater]);
 
     return (
         <div className="MyMap">
@@ -46,6 +53,13 @@ function MyMap() {
                     <GeoJSON 
                         data={counties} 
                         style={{ weight: 1, color: 'green'}} 
+                    />
+                }
+
+                { water && mapState.waterEnabled && 
+                    <GeoJSON 
+                        data={water} 
+                        style={{ weight: 1, color: 'blue'}} 
                     />
                 }
             </MapContainer>
