@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useContext } from 'react';
 import { MapContainer } from 'react-leaflet/MapContainer'
 import { TileLayer } from 'react-leaflet/TileLayer'
 import { GeoJSON } from 'react-leaflet/GeoJSON'
 import './MyMap.css'
 import Gis from '../../services/data/Gis'
 import Constants from '../../services/Constants'
+import MapViewContext from '../../views/MapView/MapViewContext';
 
 function MyMap() {
     const MAPCENTER = [38.5042075,-97.3662048]; // roughly the center of the US
     const DEFAULTZOOM = 5;
     let [counties, setCounties] = useState(null);
+    let mapState = useContext(MapViewContext);
 
     // retrieve all US counties 
     useEffect(function(){
@@ -25,7 +28,7 @@ function MyMap() {
                     url={Constants.ApiUrls.GETBASEMAPTILES}
                 />
 
-                { counties && 
+                { counties && mapState.countiesEnabled && 
                     <GeoJSON 
                         data={counties} 
                         style={{ weight: 1, color: 'green'}} 

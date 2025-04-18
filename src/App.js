@@ -1,11 +1,11 @@
 import './App.css';
-import MyMap from './components/Map/MyMap';
+import MapView from './views/MapView/MapView';
 
 function App() {
 
   return (
     <div className="App">
-      <MyMap></MyMap>
+      <MapView></MapView>
     </div>
   );
 }
